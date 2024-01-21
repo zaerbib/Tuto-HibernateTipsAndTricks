@@ -5,7 +5,7 @@
 	<packaging>jar</packaging>
 	<artifactId>10-MultiTenancy</artifactId>
 	<parent>
-		<groupId>com.thorben.janssen.talks</groupId>
+		<groupId>com.thorben.janssen.talk</groupId>
 		<artifactId>HibernateTips</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>

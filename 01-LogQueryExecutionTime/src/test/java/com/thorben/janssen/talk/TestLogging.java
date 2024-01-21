@@ -1,17 +1,16 @@
 package com.thorben.janssen.talk;
 
+import com.thorben.janssen.talk.model.Author;
+import com.thorben.janssen.talk.utils.GenerateAuthor;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.thorben.janssen.talk.model.Author;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
 
 public class TestLogging {
 
@@ -35,6 +34,9 @@ public class TestLogging {
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+
+        GenerateAuthor.generateAuthors(1000)
+                .forEach(em::persist);
 
         TypedQuery<Author> q = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class);
         q.setParameter("id", 1L);
