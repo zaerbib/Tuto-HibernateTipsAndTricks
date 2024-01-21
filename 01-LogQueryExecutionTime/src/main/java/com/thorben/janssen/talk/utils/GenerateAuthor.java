@@ -1,6 +1,7 @@
 package com.thorben.janssen.talk.utils;
 
 import com.thorben.janssen.talk.model.Author;
+import com.thorben.janssen.talk.model.AuthorStatus;
 import net.datafaker.Faker;
 
 import java.util.List;
@@ -10,13 +11,14 @@ import java.util.stream.IntStream;
 
 public class GenerateAuthor {
 
-    private static final Faker faker = new Faker(new Random());
 
     public static Author generateAuthor() {
+        Faker faker = new Faker(new Random());
+
         Author author = new Author();
         author.setFirstName(faker.name().firstName());
         author.setLastName(faker.name().lastName());
-
+        author.setStatus(faker.options().option(AuthorStatus.class));
         return author;
     }
 

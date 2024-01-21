@@ -16,6 +16,9 @@ public class Author {
 
 	private String lastName;
 
+	@Enumerated(EnumType.STRING)
+	private AuthorStatus status;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -39,7 +42,15 @@ public class Author {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+	public AuthorStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AuthorStatus status) {
+		this.status = status;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
