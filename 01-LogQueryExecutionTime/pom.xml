@@ -29,9 +29,13 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.thorben.janssen.talk</groupId>
-			<artifactId>utils</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.datafaker</groupId>
+			<artifactId>datafaker</artifactId>
 		</dependency>
 	</dependencies>
 	<artifactId>01-LogQueryExecutionTime</artifactId>

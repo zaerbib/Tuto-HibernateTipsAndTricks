@@ -1,7 +1,10 @@
 package com.thorben.janssen.talk;
 
-import java.util.UUID;
-
+import com.thorben.janssen.talk.model.Author;
+import com.thorben.janssen.talk.utils.GenerateAuthor;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -9,11 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.thorben.janssen.talk.model.Author;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import java.util.UUID;
 
 public class TestUUIDPrimaryKey {
 
@@ -38,12 +37,12 @@ public class TestUUIDPrimaryKey {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Author a = new Author();
-        a.setFirstName("Thorben");
-        a.setLastName("Janssen");
+        GenerateAuthor.generateAuthors(10_000)
+                        .forEach(em::persist);
 
-        log.info("Persist new Author entity.");
-        em.persist(a);
+        log.info("Persist new Authors entity.");
+
+        Author a = (Author) em.createNativeQuery("select * from author limit 1", Author.class).getSingleResult();
 
         em.getTransaction().commit();
         em.close();

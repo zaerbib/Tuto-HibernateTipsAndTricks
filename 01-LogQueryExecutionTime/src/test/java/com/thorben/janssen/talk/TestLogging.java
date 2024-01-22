@@ -35,7 +35,7 @@ public class TestLogging {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        GenerateAuthor.generateAuthors(1000)
+        GenerateAuthor.generateAuthors(10)
                 .forEach(em::persist);
 
         TypedQuery<Author> q = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class);
