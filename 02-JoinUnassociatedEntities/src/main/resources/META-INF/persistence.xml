@@ -10,7 +10,7 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.generate_statistics" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
 
 			<property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/recipes" />
@@ -19,8 +19,6 @@
 
 			<property name="jakarta.persistence.schema-generation.database.action"
 				value="drop-and-create" />
-			<property name="jakarta.persistence.sql-load-script-source"
-				value="data.sql" />
 		</properties>
 	</persistence-unit>
 </persistence>
