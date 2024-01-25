@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
 public class Review {
 
 	@Id
@@ -23,4 +24,14 @@ public class Review {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_book")
 	private Book book;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
 }

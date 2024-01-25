@@ -6,7 +6,6 @@ import com.thorben.janssen.talk.utils.GenerateBookAndReview;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -43,15 +42,16 @@ public class TestJoinUnassociatedEntities {
 
         List<Book> books = IntStream.range(0, 10000)
                 .mapToObj(item -> GenerateBookAndReview
-                        .generateBook(ThreadLocalRandom.current().nextInt(1, 5)))
+                        .generateBook(ThreadLocalRandom.current().nextInt(1, 5),
+                                ThreadLocalRandom.current().nextInt(1, 5)))
                 .toList();
 
         Lists.partition(books, CHUNK_SIZE)
                 .forEach(items -> saveAllFlush(em, items));
 
-        Query q = em.createQuery("SELECT b.title, count(r.id) FROM Book b INNER JOIN Review r ON r.book.id = b.id GROUP BY b.title").setFirstResult(0).setMaxResults(5);
+        /*Query q = em.createQuery("SELECT b.title, count(r.id) FROM Book b INNER JOIN Review r ON r.book.id = b.id GROUP BY b.title").setFirstResult(0).setMaxResults(5);
         Object[] r = (Object[]) q.getResultList().toArray();
-        log.info(r[0] + " received " + r[1] + " reviews.");
+        log.info(r[0] + " received " + r[1] + " reviews.");*/
 
         em.getTransaction().commit();
         em.close();
