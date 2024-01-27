@@ -11,8 +11,9 @@ import java.util.stream.IntStream;
 
 public class GenerateBookAndReview {
 
+    public final static Faker faker = new Faker();
+
     public static Book generateBook(int numberReviews, int authors) {
-        Faker faker = new Faker();
         Book book = new Book();
         book.setTitle(faker.book().title());
         book.setVersion(faker.number().positive());
@@ -27,7 +28,6 @@ public class GenerateBookAndReview {
     }
 
     public static Review generateReview(Book book) {
-        Faker faker = new Faker();
         Review review = new Review();
         review.setBook(book);
         review.setComment(faker.shakespeare().romeoAndJulietQuote());
@@ -36,11 +36,11 @@ public class GenerateBookAndReview {
     }
 
     public static Author generateAuthor(Book book) {
-        Faker faker = new Faker();
         Author author = new Author();
         author.setFirstName(faker.name().firstName());
         author.setLastName(faker.name().lastName());
         author.setStatus(faker.options().option(AuthorStatus.class));
+        author.setVersion(faker.number().numberBetween(1, 100));
         author.getBooks().add(book);
 
         return author;

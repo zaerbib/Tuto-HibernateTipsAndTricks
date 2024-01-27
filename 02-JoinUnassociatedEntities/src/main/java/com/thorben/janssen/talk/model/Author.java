@@ -5,7 +5,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,10 +31,13 @@ public class Author {
 
 	private String lastName;
 
-	@Enumerated(EnumType.STRING)
 	private AuthorStatus status;
 
 	@ManyToMany(mappedBy = "authors")
 	private Set<Book> books = new HashSet<>();
+
+	@Generated(GenerationTime.ALWAYS)
+	@ColumnDefault("CURRENT_TIMESTAMP")
+	private LocalDateTime lastUpdate;
 
 }
